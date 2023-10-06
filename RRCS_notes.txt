@@ -1,0 +1,5 @@
+# RRCS notes
+# forked from git repo 
+# altered RRCS.py to return a .TSV which eases parsing in R
+# example usage: python RRCS.py gpcr.pdb
+# notes: RRCS.py and PDB file must be in the same directory 

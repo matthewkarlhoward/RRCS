@@ -97,15 +97,15 @@ def calc_contact(pdbbase):
                                 
 def main(pdbbase):
     contact = calc_contact(pdbbase)
-    outf = pdbbase + '.cscore'
-    fout = open(outf, 'w')
-    for a_res in contact:
-        b_res_list = contact[a_res].keys()
-        for b_res in b_res_list:
-            score = contact[a_res][b_res]
-            if score > 0:
-                fout.write('%-12s\t%-12s%10.6f\n' %(a_res, b_res, score))
-    fout.close()
+    outf = pdbbase + '.tsv'  # Change the file extension to .tsv
+    with open(outf, 'w', newline='') as fout:  # Use 'newline' parameter for CSV compatibility
+        fout.write("Residue_A\tResidue_B\tScore\n")  # Write the header row
+        for a_res in contact:
+            b_res_list = contact[a_res].keys()
+            for b_res in b_res_list:
+                score = contact[a_res][b_res]
+                if score > 0:
+                    fout.write(f'{a_res}\t{b_res}\t{score:.6f}\n')  # Write data in tab-separated format
 
 fin = sys.argv[1]
 main(fin)
